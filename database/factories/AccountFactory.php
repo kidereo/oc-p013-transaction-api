@@ -16,7 +16,7 @@ class AccountFactory extends Factory
         return [
             'name' => 'Argent Bank Account',
             'iban'=>$this->faker->iban,
-            'balance' => $this->faker->numberBetween(-10000, 10000)
+            'balance' => $this->faker->randomFloat(2,-10000, 10000)
         ];
     }
 }
