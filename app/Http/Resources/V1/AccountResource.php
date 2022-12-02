@@ -16,12 +16,13 @@ class AccountResource extends JsonResource {
     {
         //return parent::toArray($request);
         return [
-            'id'        => $this -> id,
-            'name'      => $this -> name,
-            'iban'      => $this -> iban,
-            'balance'   => $this -> balance,
-            'createdAt' => $this -> created_at,
-            'updatedAt' => $this -> updated_at
+            'id'           => $this -> id,
+            'name'         => $this -> name,
+            'iban'         => $this -> iban,
+            'balance'      => $this -> balance,
+            'createdAt'    => $this -> created_at,
+            'updatedAt'    => $this -> updated_at,
+            'transactions' => TransactionResource ::collection($this -> whenLoaded('transactions'))
         ];
     }
 }

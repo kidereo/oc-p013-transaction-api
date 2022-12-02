@@ -18,7 +18,7 @@ class AccountController extends Controller {
      */
     public function index()
     {
-        return new AccountCollection(Account ::paginate());
+        return new AccountCollection(Account ::with('transactions') -> paginate());
     }
 
     /**
@@ -50,7 +50,7 @@ class AccountController extends Controller {
      */
     public function show(Account $account)
     {
-        return new AccountResource($account);
+        return new AccountResource($account -> loadMissing('transactions'));
     }
 
     /**
