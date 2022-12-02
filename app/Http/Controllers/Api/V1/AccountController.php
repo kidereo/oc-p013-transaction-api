@@ -18,7 +18,8 @@ class AccountController extends Controller {
      */
     public function index()
     {
-        return new AccountCollection(Account ::with('transactions') -> paginate());
+        return new AccountCollection(Account ::paginate());
+        //return new AccountCollection(Account ::with('transactions') -> paginate());
     }
 
     /**
