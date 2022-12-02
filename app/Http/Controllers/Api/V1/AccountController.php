@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
-use App\Models\Transaction;
+use App\Http\Requests\StoreAccountRequest;
+use App\Http\Requests\UpdateAccountRequest;
+use App\Models\Account;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\AccountResource;
+use App\Http\Resources\V1\AccountCollection;
 
-class TransactionController extends Controller
-{
+class AccountController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        return new AccountCollection(Account ::paginate());
     }
 
     /**
@@ -31,10 +34,10 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTransactionRequest  $request
+     * @param \App\Http\Requests\StoreAccountRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTransactionRequest $request)
+    public function store(StoreAccountRequest $request)
     {
         //
     }
@@ -42,21 +45,21 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(Account $account)
     {
-        //
+        return new AccountResource($account);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit(Account $account)
     {
         //
     }
@@ -64,11 +67,11 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTransactionRequest  $request
-     * @param  \App\Models\Transaction  $transaction
+     * @param \App\Http\Requests\UpdateAccountRequest $request
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
+    public function update(UpdateAccountRequest $request, Account $account)
     {
         //
     }
@@ -76,10 +79,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Account $account)
     {
         //
     }
