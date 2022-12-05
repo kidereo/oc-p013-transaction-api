@@ -14,13 +14,24 @@ class AccountFactory extends Factory {
     public function definition()
     {
         $accountType = $this -> faker -> randomElement(['Checking', 'Saving', 'Credit']);
-        $iban = $this -> faker -> iban;
-        $accountNumber = substr($iban, - 4);
+        //$balance = $accountType == "Saving" ? $this -> faker -> randomFloat(2, 10, 100000) : $this -> faker -> randomFloat(2, - 10000, 10000);
+        if ($accountType == "Saving")
+        {
+            $balance = $this -> faker -> randomFloat(2, 10, 100000);
+        } elseif ($accountType == "Credit")
+        {
+            $balance = $this -> faker -> randomFloat(2, - 10000, 0);
+        } else
+        {
+            $balance = $this -> faker -> randomFloat(2, - 10000, 10000);
+        }
+        $iban = $this -> faker -> iban("FR", "ARGB");
 
         return [
-            'name'    => 'Argent Bank ' . $accountType . ' (x' . $accountNumber . ')',
+            'name'    => 'Argent Bank ' . $accountType . ' (x' . substr($iban, - 4) . ')',
             'iban'    => $iban,
-            'balance' => $this -> faker -> randomFloat(2, - 10000, 10000)
+            'type'    => $accountType,
+            'balance' => $balance
         ];
     }
 }

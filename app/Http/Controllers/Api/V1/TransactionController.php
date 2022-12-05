@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\V1\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Resources\V1\TransactionCollection;
 use App\Http\Resources\V1\TransactionResource;
@@ -39,7 +39,7 @@ class TransactionController extends Controller {
      */
     public function store(StoreTransactionRequest $request)
     {
-        //
+        return new  TransactionResource(Transaction ::create($request -> all()));
     }
 
     /**

@@ -19,7 +19,7 @@ class TransactionFactory extends Factory {
         return [
             'account_id'  => Account ::factory(),
             'description' => $this -> faker -> company,
-            'amount'      => $this -> faker -> randomFloat(2,5, 200),
+            'amount'      => $this -> faker -> randomFloat(2, 5, 200),
             'date'        => $this -> faker -> dateTimeThisDecade(),
             'type'        => $type
         ];

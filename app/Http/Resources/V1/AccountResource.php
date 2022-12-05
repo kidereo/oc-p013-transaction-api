@@ -19,6 +19,7 @@ class AccountResource extends JsonResource {
             'id'           => $this -> id,
             'name'         => $this -> name,
             'iban'         => $this -> iban,
+            'type'         => $this -> type,
             'balance'      => $this -> balance,
             'createdAt'    => $this -> created_at,
             'updatedAt'    => $this -> updated_at,

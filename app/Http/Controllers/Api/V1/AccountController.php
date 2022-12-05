@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
+//namespace App\Http\Requests\V1;
 
-use App\Http\Requests\StoreAccountRequest;
+use App\Http\Requests\V1\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use App\Http\Controllers\Controller;
@@ -40,7 +41,7 @@ class AccountController extends Controller {
      */
     public function store(StoreAccountRequest $request)
     {
-        //
+        return new AccountResource(Account ::create($request -> all()));
     }
 
     /**
