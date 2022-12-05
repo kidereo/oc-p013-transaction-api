@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
-//namespace App\Http\Requests\V1;
 
 use App\Http\Requests\V1\StoreAccountRequest;
 use App\Http\Requests\V1\UpdateAccountRequest;
@@ -24,16 +23,6 @@ class AccountController extends Controller {
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\StoreAccountRequest $request
@@ -53,17 +42,6 @@ class AccountController extends Controller {
     public function show(Account $account)
     {
         return new AccountResource($account -> loadMissing('transactions'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Account $account
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Account $account)
-    {
-        //
     }
 
     /**
