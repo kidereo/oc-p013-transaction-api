@@ -86,6 +86,6 @@ class AccountController extends Controller {
      */
     public function destroy(Account $account)
     {
-        //
+        $account -> delete();
     }
 }
