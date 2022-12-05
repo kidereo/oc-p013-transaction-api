@@ -20,7 +20,9 @@ class Transaction extends Model {
         "date",
         "type",
         "category",
-        "notes"
+        "notes",
+        "created_at",
+        "updated_at"
     ];
 
     public function account()

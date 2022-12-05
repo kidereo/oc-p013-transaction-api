@@ -25,13 +25,13 @@ class StoreTransactionRequest extends FormRequest {
     public function rules()
     {
         return [
-            "accountId"   => ["required"],
+            "accountId"   => ["required", "integer"],
             "description" => ["required"],
-            "amount"      => ["required"],
-            "date"        => ["required"],
+            "amount"      => ["required", "numeric"],
+            "date"        => ["required", 'date_format:Y-m-d H:i:s'],
             "type"        => ["required", Rule ::in(['Electronic', 'Cash', 'Cheque'])],
-            "category",
-            "notes"
+            "category"    => ["nullable"],
+            "notes"       => ["nullable"]
         ];
     }
 

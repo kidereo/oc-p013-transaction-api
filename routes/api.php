@@ -22,6 +22,15 @@ Route ::middleware('auth:sanctum') -> get('/user', function (Request $request) {
 });
 
 Route ::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
-    Route ::apiResource('accounts', AccountController::class);
-    Route ::apiResource('transactions', TransactionController::class);
+
+    //Route all lists
+    Route ::get('accounts', ['uses' => 'AccountController@index']);
+    Route ::get('transactions', ['uses' => 'TransactionController@index']);
+
+    //Route individual actions
+    Route ::apiResource('account', AccountController::class);
+    Route ::apiResource('transaction', TransactionController::class);
+
+    //Route bulk additions
+    Route ::post('transactions/bulk', ['uses' => 'TransactionController@bulkStore']);
 });
