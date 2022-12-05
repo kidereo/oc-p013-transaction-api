@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 //namespace App\Http\Requests\V1;
 
 use App\Http\Requests\V1\StoreAccountRequest;
-use App\Http\Requests\UpdateAccountRequest;
+use App\Http\Requests\V1\UpdateAccountRequest;
 use App\Models\Account;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\AccountResource;
@@ -75,7 +75,7 @@ class AccountController extends Controller {
      */
     public function update(UpdateAccountRequest $request, Account $account)
     {
-        //
+        $account -> update($request -> all());
     }
 
     /**
