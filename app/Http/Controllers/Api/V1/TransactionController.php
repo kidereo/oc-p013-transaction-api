@@ -21,7 +21,14 @@ class TransactionController extends Controller {
      */
     public function index()
     {
-        return new TransactionCollection(Transaction ::paginate());
+        $meta = [
+            'status'  => 200,
+            'message' => 'Transactions retrieved successfully.',
+        ];
+
+        $transactionCollection = new TransactionCollection(Transaction ::paginate());
+
+        return $transactionCollection -> additional($meta);
     }
 
     /**
@@ -32,7 +39,14 @@ class TransactionController extends Controller {
      */
     public function store(StoreTransactionRequest $request)
     {
-        return new  TransactionResource(Transaction ::create($request -> all()));
+        $meta = [
+            'status'  => 201,
+            'message' => 'New transaction created.',
+        ];
+
+        $newTransaction = new  TransactionResource(Transaction ::create($request -> all()));
+
+        return $newTransaction -> additional($meta);
     }
 
     /**
@@ -44,10 +58,10 @@ class TransactionController extends Controller {
     public function bulkStore(StoreBulkTransactionRequest $request)
     {
         $bulk = collect($request -> all()) -> map(function ($arr, $key) {
-            return Arr::except($arr, ["accountId"]);
+            return Arr ::except($arr, ["accountId"]);
         });
 
-        Transaction::insert($bulk->toArray());
+        Transaction ::insert($bulk -> toArray());
 
     }
 
@@ -59,7 +73,14 @@ class TransactionController extends Controller {
      */
     public function show(Transaction $transaction)
     {
-        return new TransactionResource($transaction);
+        $meta = [
+            'status'  => 200,
+            'message' => 'Transaction details retrieved successfully.',
+        ];
+
+        $retrievedTransaction = new TransactionResource($transaction);
+
+        return $retrievedTransaction -> additional($meta);
     }
 
     /**
@@ -71,7 +92,14 @@ class TransactionController extends Controller {
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
+        $meta = [
+            'body'    => $transaction,
+            'status'  => 201,
+            'message' => 'Transaction modified successfully.'
+        ];
         $transaction -> update($request -> all());
+
+        return response($meta);
     }
 
     /**
@@ -82,6 +110,17 @@ class TransactionController extends Controller {
      */
     public function destroy(Transaction $transaction)
     {
+        $meta = [
+            'body'    => [
+                'id'    => auth() -> user() -> id,
+                'email' => auth() -> user() -> email
+            ],
+            'status'  => 200,
+            'message' => 'Transaction deleted successfully.',
+        ];
+
         $transaction -> delete();
+
+        return response($meta);
     }
 }
