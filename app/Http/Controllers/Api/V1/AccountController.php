@@ -18,7 +18,14 @@ class AccountController extends Controller {
      */
     public function index()
     {
-        return new AccountCollection(Account ::paginate());
+        $meta = [
+            'status'  => 200,
+            'message' => 'Accounts retrieved successfully.',
+        ];
+
+        $accountCollection = new AccountCollection(Account ::paginate());
+
+        return $accountCollection -> additional($meta);
         //return new AccountCollection(Account ::with('transactions') -> paginate());
     }
 
@@ -30,7 +37,15 @@ class AccountController extends Controller {
      */
     public function store(StoreAccountRequest $request)
     {
-        return new AccountResource(Account ::create($request -> all()));
+        $meta = [
+            'status'  => 201,
+            'message' => 'New account created.',
+        ];
+
+        $newAccount = new AccountResource(Account ::create($request -> all()));
+
+        return $newAccount -> additional($meta);
+        //return new AccountResource(Account ::create($request -> all()));
     }
 
     /**
@@ -41,7 +56,15 @@ class AccountController extends Controller {
      */
     public function show(Account $account)
     {
-        return new AccountResource($account -> loadMissing('transactions'));
+        $meta = [
+            'status'  => 200,
+            'message' => 'Account details retrieved successfully.',
+        ];
+
+        $retrievedAccount = new AccountResource($account -> loadMissing('transactions'));
+
+        return $retrievedAccount -> additional($meta);
+        //return new AccountResource($account -> loadMissing('transactions'));
     }
 
     /**
@@ -53,7 +76,14 @@ class AccountController extends Controller {
      */
     public function update(UpdateAccountRequest $request, Account $account)
     {
+        $meta = [
+            'body'    => $account,
+            'status'  => 201,
+            'message' => 'Account modified successfully.'
+        ];
         $account -> update($request -> all());
+
+        return response($meta);
     }
 
     /**
@@ -64,6 +94,16 @@ class AccountController extends Controller {
      */
     public function destroy(Account $account)
     {
+        $meta = [
+            'body'    => [
+                'id'    => auth() -> user() -> id,
+                'email' => auth() -> user() -> email
+            ],
+            'status'  => 200,
+            'message' => 'Account deleted successfully.',
+        ];
         $account -> delete();
+
+        return response($meta);
     }
 }
