@@ -14,8 +14,9 @@ class StoreAccountRequest extends FormRequest {
      */
     public function authorize()
     {
-        $user = $this->user();
-        return $user != null && $user->tokenCan('create');
+        $user = $this -> user();
+
+        return $user != null && $user -> tokenCan('create');
     }
 
     /**
@@ -26,10 +27,10 @@ class StoreAccountRequest extends FormRequest {
     public function rules()
     {
         return [
-            "name"    => ["required"],
-            "type"    => ["required", Rule ::in(['Checking', 'Saving', 'Credit'])],
-            "balance" => ["required"],
-            "iban"    => ["required"]
+            'name'    => ['required'],
+            'type'    => ['required', Rule ::in(['Checking', 'Saving', 'Credit'])],
+            'balance' => ['required'],
+            'iban'    => ['required']
         ];
     }
 }

@@ -14,8 +14,9 @@ class UpdateTransactionRequest extends FormRequest {
      */
     public function authorize()
     {
-        $user = $this->user();
-        return $user != null && $user->tokenCan('update');
+        $user = $this -> user();
+
+        return $user != null && $user -> tokenCan('update');
     }
 
     /**
@@ -30,24 +31,24 @@ class UpdateTransactionRequest extends FormRequest {
         if ($method == "PUT")
         {
             return [
-                "accountId"   => ["required"],
-                "description" => ["required"],
-                "amount"      => ["required"],
-                "date"        => ["required"],
-                "type"        => ["required", Rule ::in(['Electronic', 'Cash', 'Cheque'])],
-                "category",
-                "notes"
+                'accountId'   => ['required'],
+                'description' => ['required'],
+                'amount'      => ['required'],
+                'date'        => ['required'],
+                'type'        => ['required', Rule ::in(['Electronic', 'Cash', 'Cheque'])],
+                'category',
+                'notes'
             ];
         } else
         {
             return [
-                "accountId"   => ["sometimes", "required"],
-                "description" => ["sometimes", "required"],
-                "amount"      => ["sometimes", "required"],
-                "date"        => ["sometimes", "required"],
-                "type"        => ["sometimes", "required", Rule ::in(['Electronic', 'Cash', 'Cheque'])],
-                "category"    => ["sometimes"],
-                "notes"       => ["sometimes"]
+                'accountId'   => ['sometimes', 'required'],
+                'description' => ['sometimes', 'required'],
+                'amount'      => ['sometimes', 'required'],
+                'date'        => ['sometimes', 'required'],
+                'type'        => ['sometimes', 'required', Rule ::in(['Electronic', 'Cash', 'Cheque'])],
+                'category'    => ['sometimes'],
+                'notes'       => ['sometimes']
             ];
         }
     }
@@ -57,7 +58,7 @@ class UpdateTransactionRequest extends FormRequest {
         if ($this -> accountId)
         {
             $this -> merge([
-                "account_id" => $this -> accountId
+                'account_id' => $this -> accountId
             ]);
         }
     }

@@ -14,8 +14,9 @@ class UpdateAccountRequest extends FormRequest {
      */
     public function authorize()
     {
-        $user = $this->user();
-        return $user != null && $user->tokenCan('update');
+        $user = $this -> user();
+
+        return $user != null && $user -> tokenCan('update');
     }
 
     /**
@@ -30,18 +31,18 @@ class UpdateAccountRequest extends FormRequest {
         if ($method == "PUT")
         {
             return [
-                "name"    => ["required"],
-                "type"    => ["required", Rule ::in(['Checking', 'Saving', 'Credit'])],
-                "balance" => ["required"],
-                "iban"    => ["required"]
+                'name'    => ['required'],
+                'type'    => ['required', Rule ::in(['Checking', 'Saving', 'Credit'])],
+                'balance' => ['required'],
+                'iban'    => ['required']
             ];
         } else
         {
             return [
-                "name"    => ["sometimes", "required"],
-                "type"    => ["sometimes", "required", Rule ::in(['Checking', 'Saving', 'Credit'])],
-                "balance" => ["sometimes", "required"],
-                "iban"    => ["sometimes", "required"]
+                'name'    => ['sometimes', 'required'],
+                'type'    => ['sometimes', 'required', Rule ::in(['Checking', 'Saving', 'Credit'])],
+                'balance' => ['sometimes', 'required'],
+                'iban'    => ['sometimes', 'required']
             ];
         }
     }

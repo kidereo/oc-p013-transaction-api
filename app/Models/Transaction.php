@@ -14,19 +14,19 @@ class Transaction extends Model {
     use HasFactory;
 
     protected $fillable = [
-        "account_id",
-        "description",
-        "amount",
-        "date",
-        "type",
-        "category",
-        "notes",
-        "created_at",
-        "updated_at"
+        'account_id',
+        'description',
+        'amount',
+        'date',
+        'type',
+        'category',
+        'notes',
+        'created_at',
+        'updated_at'
     ];
 
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this -> belongsTo(Account::class);
     }
 }

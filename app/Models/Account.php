@@ -15,10 +15,10 @@ class Account extends Model {
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "balance",
-        "iban",
-        "type"
+        'name',
+        'balance',
+        'iban',
+        'type'
     ];
 
     public function transactions()

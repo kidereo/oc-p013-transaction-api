@@ -22,16 +22,16 @@ Route ::get('/', function () {
 
 Route ::get('/setup', function () {
     $credentials = [
-        "email"    => "admin@test.com",
-        "password" => "password"
+        'email'    => "admin@test.com",
+        'password' => "password"
     ];
 
     if (!Auth ::attempt($credentials))
     {
         $user = new User();
         $user -> name = "Admin";
-        $user -> email = $credentials["email"];
-        $user -> password = Hash ::make($credentials["password"]);
+        $user -> email = $credentials['email'];
+        $user -> password = Hash ::make($credentials['password']);
         $user -> save();
 
         if (Auth ::attempt($credentials))

@@ -14,8 +14,9 @@ class StoreTransactionRequest extends FormRequest {
      */
     public function authorize()
     {
-        $user = $this->user();
-        return $user != null && $user->tokenCan('create');
+        $user = $this -> user();
+
+        return $user != null && $user -> tokenCan('create');
     }
 
     /**
@@ -26,20 +27,20 @@ class StoreTransactionRequest extends FormRequest {
     public function rules()
     {
         return [
-            "accountId"   => ["required", "integer"],
-            "description" => ["required"],
-            "amount"      => ["required", "numeric"],
-            "date"        => ["required", 'date_format:Y-m-d H:i:s'],
-            "type"        => ["required", Rule ::in(['Electronic', 'Cash', 'Cheque'])],
-            "category"    => ["nullable"],
-            "notes"       => ["nullable"]
+            'accountId'   => ['required', 'integer'],
+            'description' => ['required'],
+            'amount'      => ['required', 'numeric'],
+            'date'        => ['required', 'date_format:Y-m-d H:i:s'],
+            'type'        => ['required', Rule ::in(['Electronic', 'Cash', 'Cheque'])],
+            "category"    => ['nullable'],
+            "notes"       => ['nullable']
         ];
     }
 
     protected function prepareForValidation()
     {
         $this -> merge([
-            "account_id" => $this -> accountId
+            'account_id' => $this -> accountId
         ]);
     }
 }

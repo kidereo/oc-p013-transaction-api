@@ -15,8 +15,9 @@ class StoreBulkTransactionRequest extends FormRequest {
      */
     public function authorize()
     {
-        $user = $this->user();
-        return $user != null && $user->tokenCan('create');
+        $user = $this -> user();
+
+        return $user != null && $user -> tokenCan('create');
     }
 
     /**
@@ -27,15 +28,15 @@ class StoreBulkTransactionRequest extends FormRequest {
     public function rules()
     {
         return [
-            "*.accountId"   => ["required", "integer"],
-            "*.description" => ["required"],
-            "*.amount"      => ["required", "numeric"],
-            "*.date"        => ["required", "date_format:Y-m-d H:i:s"],
-            "*.type"        => ["required", Rule ::in(['Electronic', 'Cash', 'Cheque'])],
-            "*.category"    => ["nullable"],
-            "*.notes"       => ["nullable"],
-            "*.created_at"  => ["required"],
-            "*.updated_at"  => ["required"]
+            '*.accountId'   => ['required', 'integer'],
+            '*.description' => ['required'],
+            '*.amount'      => ['required', 'numeric'],
+            '*.date'        => ['required', 'date_format:Y-m-d H:i:s'],
+            '*.type'        => ['required', Rule ::in(['Electronic', 'Cash', 'Cheque'])],
+            '*.category'    => ['nullable'],
+            '*.notes'       => ['nullable'],
+            '*.created_at'  => ['required'],
+            '*.updated_at'  => ['required']
         ];
     }
 

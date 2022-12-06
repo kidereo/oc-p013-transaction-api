@@ -20,7 +20,7 @@ class AccountController extends Controller {
     {
         $meta = [
             'status'  => 200,
-            'message' => 'Accounts retrieved successfully.',
+            'message' => "Accounts retrieved successfully.",
         ];
 
         $accountCollection = new AccountCollection(Account ::paginate());
@@ -39,7 +39,7 @@ class AccountController extends Controller {
     {
         $meta = [
             'status'  => 201,
-            'message' => 'New account created.',
+            'message' => "New account created.",
         ];
 
         $newAccount = new AccountResource(Account ::create($request -> all()));
@@ -58,7 +58,7 @@ class AccountController extends Controller {
     {
         $meta = [
             'status'  => 200,
-            'message' => 'Account details retrieved successfully.',
+            'message' => "Account details retrieved successfully.",
         ];
 
         $retrievedAccount = new AccountResource($account -> loadMissing('transactions'));
@@ -79,7 +79,7 @@ class AccountController extends Controller {
         $meta = [
             'body'    => $account,
             'status'  => 201,
-            'message' => 'Account modified successfully.'
+            'message' => "Account $account->name modified successfully."
         ];
         $account -> update($request -> all());
 
@@ -100,7 +100,7 @@ class AccountController extends Controller {
                 'email' => auth() -> user() -> email
             ],
             'status'  => 200,
-            'message' => 'Account deleted successfully.',
+            'message' => "Account $account->name deleted successfully.",
         ];
         $account -> delete();
 

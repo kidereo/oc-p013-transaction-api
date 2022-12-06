@@ -23,7 +23,7 @@ class TransactionController extends Controller {
     {
         $meta = [
             'status'  => 200,
-            'message' => 'Transactions retrieved successfully.',
+            'message' => "Transactions retrieved successfully.",
         ];
 
         $transactionCollection = new TransactionCollection(Transaction ::paginate());
@@ -41,7 +41,7 @@ class TransactionController extends Controller {
     {
         $meta = [
             'status'  => 201,
-            'message' => 'New transaction created.',
+            'message' => "New transaction created.",
         ];
 
         $newTransaction = new  TransactionResource(Transaction ::create($request -> all()));
@@ -58,7 +58,7 @@ class TransactionController extends Controller {
     public function bulkStore(StoreBulkTransactionRequest $request)
     {
         $bulk = collect($request -> all()) -> map(function ($arr, $key) {
-            return Arr ::except($arr, ["accountId"]);
+            return Arr ::except($arr, ['accountId']);
         });
 
         Transaction ::insert($bulk -> toArray());
@@ -75,7 +75,7 @@ class TransactionController extends Controller {
     {
         $meta = [
             'status'  => 200,
-            'message' => 'Transaction details retrieved successfully.',
+            'message' => "Transaction details retrieved successfully.",
         ];
 
         $retrievedTransaction = new TransactionResource($transaction);
@@ -95,7 +95,7 @@ class TransactionController extends Controller {
         $meta = [
             'body'    => $transaction,
             'status'  => 201,
-            'message' => 'Transaction modified successfully.'
+            'message' => "Transaction modified successfully."
         ];
         $transaction -> update($request -> all());
 
@@ -116,7 +116,7 @@ class TransactionController extends Controller {
                 'email' => auth() -> user() -> email
             ],
             'status'  => 200,
-            'message' => 'Transaction deleted successfully.',
+            'message' => "Transaction deleted successfully.",
         ];
 
         $transaction -> delete();
