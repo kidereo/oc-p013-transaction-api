@@ -43,7 +43,7 @@ class StoreBulkTransactionRequest extends FormRequest {
         $data = [];
         foreach ($this -> toArray() as $object)
         {
-            $object['account_id'] = $object['accountId'] ?? null;
+            $object['account_id'] = $object['accountId']; //?? null;
             $object['created_at'] = Carbon ::now();
             $object['updated_at'] = Carbon ::now();
             $data[] = $object;
