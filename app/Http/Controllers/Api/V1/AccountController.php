@@ -78,7 +78,7 @@ class AccountController extends Controller {
     {
         $meta = [
             'body'    => $account,
-            'status'  => 201,
+            'status'  => 200,
             'message' => "Account $account->name modified successfully."
         ];
         $account -> update($request -> all());

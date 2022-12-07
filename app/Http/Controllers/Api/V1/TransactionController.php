@@ -94,7 +94,7 @@ class TransactionController extends Controller {
     {
         $meta = [
             'body'    => $transaction,
-            'status'  => 201,
+            'status'  => 200,
             'message' => "Transaction modified successfully."
         ];
         $transaction -> update($request -> all());
