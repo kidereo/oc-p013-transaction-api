@@ -8,6 +8,12 @@ use App\Models\Account;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\AccountResource;
 use App\Http\Resources\V1\AccountCollection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Closure;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AccountController extends Controller {
 
@@ -56,15 +62,9 @@ class AccountController extends Controller {
      */
     public function show(Account $account)
     {
-        $meta = [
-            'status'  => 200,
-            'message' => "Account details retrieved successfully.",
-        ];
-
         $retrievedAccount = new AccountResource($account -> loadMissing('transactions'));
 
-        return $retrievedAccount -> additional($meta);
-        //return new AccountResource($account -> loadMissing('transactions'));
+        return response() -> success(200, 'Account details retrieved successfully.', $retrievedAccount);
     }
 
     /**

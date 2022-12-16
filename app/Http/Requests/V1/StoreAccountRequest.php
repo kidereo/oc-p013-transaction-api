@@ -4,6 +4,7 @@ namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use function PHPSTORM_META\type;
 
 class StoreAccountRequest extends FormRequest {
 
@@ -31,6 +32,16 @@ class StoreAccountRequest extends FormRequest {
             'type'    => ['required', Rule ::in(['Checking', 'Saving', 'Credit'])],
             'balance' => ['required'],
             'iban'    => ['required']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'validation.required.name',
+            'type.required' => 'validation.required.type',
+            'balance.required' => 'validation.required.balance',
+            'iban.required' => 'validation.required.iban',
         ];
     }
 }
